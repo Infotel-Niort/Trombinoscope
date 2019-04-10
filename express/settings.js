@@ -1,4 +1,4 @@
 module.exports = {
-    'urlDB' : 'mongodb://localhost/MadeInPlan',
+    'urlDB' : 'mongodb://localhost/Trombinoscope',
     'secret': 'leRoseauPlitMaisNeCedeQuandCasDePepin'
 }

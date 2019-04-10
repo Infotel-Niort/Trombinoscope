@@ -8,22 +8,21 @@ function createHash(password) {
 };
 
 module.exports = passport => {
-  passport.use('signup', new LocalStrategy({
-    usernameField : 'mail',
+  passport.use('register', new LocalStrategy({
+    usernameField : 'email',
     passwordField : 'password',
     passReqToCallback : true
-  }, (req, mail, password, done) => {
+  }, (req, email, password, done) => {
     findOrCreateUser = () => {
-      User.findOne({ 'mail' :  mail }, (err, user) => {
+      User.findOne({ 'email' : email }, (err, user) => {
         if (err) return done(err);
         if (user) return done(null, false, 'Adresse e-mail déjà utilisée.');
         else {
           var newUser = new User({
-            mail: req.body.mail,
+            email: email,
             password: createHash(password),
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            mail: req.body.mail,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
             picture: '',
             meta: {
               created: new Date()

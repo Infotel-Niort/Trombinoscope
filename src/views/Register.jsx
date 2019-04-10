@@ -13,12 +13,14 @@ import {
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: 'marvin.catois@live.fr',
-      password: 'azerty'
+      email: '',
+      password: '',
+      firstname: '',
+      lastname: ''
     }
   }
 
@@ -27,14 +29,14 @@ class Login extends React.Component {
   }
 
   handleSubmit = (e, value) => {
-    this.props.actions.login(this.state.email, this.state.password);
+    this.props.actions.register(this.state.email, this.state.password, this.state.firstname, this.state.lastname);
   }
 
   render() {
     return (
       <Grid verticalAlign="middle" columns={2} centered style={{ height: '100%' }}>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Connexion</Header>
+          <Header as="h2" textAlign="center">Inscription</Header>
 
           <Segment placeholder style={{ maxHeight: '500px', maxWidth: '600px' }}>
             { this.props.err &&
@@ -47,13 +49,15 @@ class Login extends React.Component {
                 <Form size="large">
                   <Form.Input onChange={this.handleChange} label='E-mail' icon="at" iconPosition="left" name="email" placeholder="E-mail"/>
                   <Form.Input onChange={this.handleChange} label='Password' icon="lock" iconPosition="left" name="password" placeholder="Mot de passe" type="password" />
+                  <Form.Input onChange={this.handleChange} label='Prénom' icon="user" iconPosition="left" name="firstname" placeholder="Prénom" />
+                  <Form.Input onChange={this.handleChange} label='Nom' icon="user" iconPosition="left" name="lastname" placeholder="Nom" />
 
-                  <Button content='Se connecter' primary onClick={this.handleSubmit} />
+                  <Button primary size="large" onClick={this.handleSubmit}>Se connecter</Button>
                 </Form>
               </Grid.Column>
 
               <Grid.Column verticalAlign='middle'>
-                <Button content="S'inscrire" icon='signup' size='big' as={Link} to='/register' />
+                <Button content='Se connecter' icon='signup' size='big' as={Link} to='/login' />
               </Grid.Column>
             </Grid>
 
@@ -73,4 +77,4 @@ const mapStateToProps = state => ({
   err: state.authentication.err
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -1,5 +1,6 @@
 import {
-  GET_USER,
+  IS_LOGGED_FAILURE,
+  IS_LOGGED_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -12,29 +13,35 @@ const initialState = isLogin ? { loggedIn: true } : { loggedIn: false }
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
-    case GET_USER:
+    case IS_LOGGED_SUCCESS:
       return {
         loggedIn: true,
-        ...action.payload,
+        user: action.payload,
+      }
+    case IS_LOGGED_FAILURE:
+      return {
+        loggedIn: false,
+        user: action.payload,
       }
     case LOGIN_SUCCESS:
       return {
-        token: action.payload.token,
-        loader: true,
+        loggedIn: true,
+        user: action.payload,
       }
     case LOGIN_FAILURE:
       return {
         loggedIn: false,
-        loginFailed: true,
         err: action.payload,
       }
     case REGISTER_SUCCESS:
       return {
-        registed: true,
+        loggedIn: true,
+        user: action.payload,
       }
     case REGISTER_FAILURE:
       return {
-        registerFailed: true,
+        loggedIn: false,
+        err: action.payload,
       }
     case LOGOUT:
       return {

@@ -45,6 +45,7 @@ app.use((req, res, next) => {
 });
 
 require('./express/routes/auth')(app, passport);
+require('./express/routes/collaborateur')(app);
 require('./express/routes/main')(app);
 
 // Catch 404 and forward to error handler

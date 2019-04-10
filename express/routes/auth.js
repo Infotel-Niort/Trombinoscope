@@ -11,7 +11,7 @@ module.exports = (app, passport) => {
 
 	/* GET isLoggedIn */
 	authRouter.get('/islogged', (req, res) => {
-		res.status(200).json({ isLogged: req.isAuthenticated(), user: req.user });
+		res.status(req.isAuthenticated() ? 200 : 401).json({ isLogged: req.isAuthenticated(), user: req.user });
 	});
 
 	/* POST Handle Login */
@@ -24,12 +24,12 @@ module.exports = (app, passport) => {
 				if (err) return res.status(500).json({ success: false });
 				return res.status(200).json({ user: user });
 			});
-		});
+		})(req,res,next);
 	});
 
 	/* POST Handle Registration */
 	authRouter.post('/register', (req, res, next) => {
-		passport.authenticate('signup', (err, user, info) => {
+		passport.authenticate('register', (err, user, info) => {
 			if (err) return res.status(500).json({ success: false });
 			if (!user) return res.status(401).json({ message: info });
 			user.save(err => {
@@ -38,7 +38,7 @@ module.exports = (app, passport) => {
 					return res.status(200).json({ user: user });
 				});
 			});
-		});
+		})(req,res,next);
 	});
 
 	/* POST Handle Logout */
