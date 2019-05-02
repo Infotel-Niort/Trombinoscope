@@ -25,6 +25,17 @@ class Collaborateurs extends React.Component {
     this.props.actions.getCollaborateurs();
   }
 
+  getMission(mission) {
+    if (mission === '') return 'En intercontrat';
+    else if (mission === 'Infotel') return 'En agence Infotel'
+    else return mission
+  }
+
+  getYearsOfExp(date) {
+    const nbMonth = new Date().getMonth() - new Date(date).getMonth() + (12 * (new Date().getFullYear() - new Date(date).getFullYear()));
+    return (nbMonth >= 12 ? (Math.floor(nbMonth / 12) + ' ans' + (nbMonth % 12 != 0 ? (' et ' + nbMonth % 12 + ' mois') : '')) : (nbMonth + ' mois'));
+  }
+
   render() {
     return (
       <Container>
@@ -35,12 +46,12 @@ class Collaborateurs extends React.Component {
           <Grid.Row columns={3}>
             { this.props.collaborateurs.map((elem, i) =>
               <Grid.Column key={i}>
-                <Card href={'/collaborateur/' + elem._id}>
+                <Card>
                   <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
                   <Card.Content>
                     <Card.Header>{ elem.firstname } { elem.lastname }</Card.Header>
                     <Card.Meta>
-                      <span className='date'>Chez nous depuis { new Date(elem.meta.created).getFullYear() }</span>
+                      <span className='date'>Chez nous depuis { this.getYearsOfExp(elem.joinedDate) }</span>
                     </Card.Meta>
                   </Card.Content>
                   <Card.Content extra>
@@ -49,7 +60,7 @@ class Collaborateurs extends React.Component {
                   </Card.Content>
                   <Card.Content extra>
                     <Icon name='factory' />
-                    { elem.mission }
+                    { this.getMission(elem.mission) }
                   </Card.Content>
                 </Card>
               </Grid.Column>

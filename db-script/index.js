@@ -4,7 +4,7 @@ mongoose.connect('mongodb://localhost/Trombinoscope');
 
 const Collaborateur = require('../express/models/Collaborateur');
 
-function addCollaborateur(collaborateur) {
+const addCollaborateur = (collaborateur) => {
   var c = new Collaborateur();
   c.firstname = collaborateur.firstname;
   c.lastname = collaborateur.lastname;
@@ -13,6 +13,7 @@ function addCollaborateur(collaborateur) {
   c.job = collaborateur.job;
   c.mission = collaborateur.mission;
   c.skills = [];
+  c.joinedDate = collaborateur.joinedDate;
   c.meta = {
     created: new Date(),
     modified: new Date()
@@ -24,8 +25,9 @@ addCollaborateur({
   firstname: 'Marvin',
   lastname: 'CATOIS',
   age: 24,
-  job: 'Ingénieur d\'étude et développement',
-  mission: 'Intercontract'
+  job: 'Ingénieur d\'étude',
+  mission: '',
+  joinedDate: new Date(2019, 1, 11)
 });
 
 addCollaborateur({
@@ -33,13 +35,15 @@ addCollaborateur({
   lastname: 'COUTINEAU',
   age: 29,
   job: 'SCRUM Master',
-  mission: 'Darva'
+  mission: 'Darva',
+  joinedDate: new Date(2016, 4, 7)
 });
 
 addCollaborateur({
   firstname: 'Justine',
   lastname: 'THIBAUDEAU',
   age: 25,
-  job: 'Responsable RH',
-  mission: 'Infotel'
+  job: 'Ressources Humaines',
+  mission: 'Infotel',
+  joinedDate: new Date(2017, 3, 1)
 });

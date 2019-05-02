@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Header, Image, Modal, Icon, Form } from 'semantic-ui-react';
+import PictureUpload from '../PictureUpload'
 
 class AddCollaborateur extends React.Component {
   constructor(props) {
@@ -29,14 +30,14 @@ class AddCollaborateur extends React.Component {
 
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Ajouter un collaborateur</Modal.Header>
-          <Modal.Content>
+          <Modal.Content image>
+            <PictureUpload />
             <Form size="large">
-              <Form.Input fluid onChange={this.handleChange} label='E-mail' icon="at" iconPosition="left" name="email" placeholder="E-mail"/>
-              <Form.Input fluid onChange={this.handleChange} label='Password' icon="lock" iconPosition="left" name="password" placeholder="Mot de passe" type="password" />
               <Form.Group widths='equal'>
                 <Form.Input fluid onChange={this.handleChange} label='Prénom' icon="user" iconPosition="left" name="firstname" placeholder="Prénom" />
                 <Form.Input fluid onChange={this.handleChange} label='Nom' icon="user" iconPosition="left" name="lastname" placeholder="Nom" />
               </Form.Group>
+              <Form.Input fluid onChange={this.handleChange} label='E-mail' icon="at" iconPosition="left" name="email" placeholder="E-mail"/>
             </Form>
           </Modal.Content>
           <Modal.Actions>

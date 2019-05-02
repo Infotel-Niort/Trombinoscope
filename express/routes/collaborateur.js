@@ -36,6 +36,7 @@ module.exports = (app) => {
 			job: req.body.job,
 			mission: req.body.mission,
 			skills: req.body.skills,
+			joinedDate: req.body.joinedDate,
 			meta: {
 				created: new Date(),
 				modified: new Date()

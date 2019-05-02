@@ -9,6 +9,7 @@ var collaborateurSchema = mongoose.Schema({
   job                 : String,
   mission             : String,
   skills              : [],
+  joinedDate          : Date,
   meta                : {
     created           : Date,
     modified          : Date
