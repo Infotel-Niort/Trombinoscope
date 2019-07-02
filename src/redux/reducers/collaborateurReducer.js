@@ -23,6 +23,14 @@ export default function collaborateur(state = initialState, action) {
       return {
         collaborateurs: [...state.collaborateurs, action.payload.collaborateur]
       }
+    case REMOVE_COLLABORATEUR:
+      return {
+        collaborateurs: [...state.collaborateurs, action.payload.collaborateur]
+      }
+    case EDIT_COLLABORATEUR:
+      return {
+        collaborateurs: [...state.collaborateurs, action.payload.collaborateur]
+      }
     default:
       return state
   }

@@ -23,9 +23,16 @@ export const addCollaborateur = (collaborateur) => async (dispatch) => {
   } catch (err) {}
 }
 
-export const updateCollaborateur = (collaborateur) => async (dispatch) => {
+export const updateCollaborateur = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.put('/collaborateur/update', collaborateur);
-    dispatch({ type: types.EDIT_COLLABORATEUR, payload: { collaborateur, id: data.id } });
+    const { data } = await axios.put('/collaborateur/update/' + id);
+    dispatch({ type: types.EDIT_COLLABORATEUR, payload: { id: data.id } });
+  } catch (err) {}
+}
+
+export const deleteCollaborateur = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.post('/collaborateur/delete/' + id);
+    dispatch({ type: types.REMOVE_COLLABORATEUR, payload: { id: data.id } });
   } catch (err) {}
 }

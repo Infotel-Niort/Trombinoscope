@@ -49,6 +49,18 @@ module.exports = (app) => {
 		});
 	});
 
+	/* POST Delete one Collaborateur */
+	collaborateurRouter.post('/delete/:id', isLoggedIn, (req, res) => {
+		Collaborateur.findOne({ _id: req.params.id }, (err, collaborateur) => {
+			if (err) res.status(500).json({ err: err });
+
+			collaborateur.delete((err, c) => {
+				if (err) res.status(500).json({ err: err });
+				return res.status(200).json();
+			})
+		});
+	});
+
 	/* POST Add One Collaborateur */
 	collaborateurRouter.post('/add', isLoggedIn, (req, res) => {
 		var collaborateur = new Collaborateur({
