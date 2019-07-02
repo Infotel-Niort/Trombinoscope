@@ -22,3 +22,10 @@ export const addCollaborateur = (collaborateur) => async (dispatch) => {
     dispatch({ type: types.ADD_COLLABORATEUR, payload: { collaborateur, id: data.id } });
   } catch (err) {}
 }
+
+export const updateCollaborateur = (collaborateur) => async (dispatch) => {
+  try {
+    const { data } = await axios.put('/collaborateur/update', collaborateur);
+    dispatch({ type: types.EDIT_COLLABORATEUR, payload: { collaborateur, id: data.id } });
+  } catch (err) {}
+}

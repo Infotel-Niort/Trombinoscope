@@ -18,6 +18,29 @@ module.exports = (app) => {
 		});
 	});
 
+	/* PUT Update a Collaborateur */
+	collaborateurRouter.post('/update/:id', isLoggedIn, (req, res) => {
+		Collaborateur.findOne({ _id: req.params.id }, (err, collaborateur) => {
+			if (err) res.status(500).json({ err: err });
+			collaborateur.firstname = req.body.firstname != null ? req.body.firstname : collaborateur.firstname;
+			collaborateur.lastname = req.body.lastname != null ? req.body.lastname : collaborateur.lastname;
+			collaborateur.age = req.body.age != null ? req.body.age : collaborateur.age;
+			collaborateur.picture = req.body.picture != null ? req.body.picture : collaborateur.picture;
+			collaborateur.job = req.body.job != null ? req.body.job : collaborateur.job;
+			collaborateur.mission = req.body.mission != null ? req.body.mission : collaborateur.mission;
+			collaborateur.skills = req.body.skills != null ? req.body.skills : collaborateur.skills;
+			collaborateur.joinedDate = req.body.joinedDate != null ? req.body.joinedDate : collaborateur.joinedDate;
+			collaborateur.meta= {
+					created: new Date(),
+					modified: new Date()
+			}
+			collaborateur.save((err, c) => {
+				if (err) res.status(500).json({ err: err });
+				return res.status(200).json({ collaborateur: c });
+			})
+		});
+	});
+
 	/* GET One Collaborateur */
 	collaborateurRouter.get('/:id', isLoggedIn, (req, res) => {
 		Collaborateur.findOne({ _id: req.params.id }, (err, collaborateur) => {
